@@ -104,8 +104,8 @@ class Card(Enum):
             if rank == card_rank and suit == card_suit:
                 return card
         raise Exception(f"This card does not exist: {card_rank}, {card_suit}. This should be impossible as all combinations are defined")
-
-    @staticmethod
+                    
+    @staticmethod   
     def get_card(rank: Rank, suit: Suit) -> 'Card':
         return _CardCache._CARD_CACHE[(rank, suit)]
 
