@@ -55,9 +55,9 @@ class own_bot(Bot):
             
             for move in moves:
                 if move[1] == attacking_suit:
-                    same_suit_moves.append(tuple(move,TS.rank_to_points(move.Suit)))
+                    same_suit_moves.append(tuple(move,TS.rank_to_points(move.Rank)))
                 else:
-                    different_suit_moves.append(tuple(move, TS.rank_to_points(move.Suit)))
+                    different_suit_moves.append(tuple(move, TS.rank_to_points(move.Rank)))
 
             if len(same_suit_moves) == 0:
                 return max(different_suit_moves, lambda x: x[1])
