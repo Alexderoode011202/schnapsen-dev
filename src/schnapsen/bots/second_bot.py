@@ -1,9 +1,9 @@
 from typing import Optional, List
 import random
 from schnapsen.game import Bot, Move, PlayerPerspective, SchnapsenTrickScorer
-from deck import Card, Rank, Suit
+from schnapsen.deck import Card, Rank, Suit
 
-class own_bot(Bot):
+class second_bot(Bot):
     def __init__(self):
         super().__init__()
 
@@ -17,22 +17,22 @@ class own_bot(Bot):
         TS = SchnapsenTrickScorer
 
         # This is step 2
-        if PlayerPerspective.get_my_score < PlayerPerspective.get_opponent_score():
+        if PlayerPerspective.get_my_score() < PlayerPerspective.get_opponent_score():
             for move in moves:
                 if move.is_marriage() or move.is_trump_exchange():
                     chosen_move = move
                 else:
                     continue
-            
-            #Here we go to step 3
-            if chosen_move == None:
-                same_suit_list = [ move.Suit == last_suit for move in moves]
-                for move in same_suit_list:
-                    value_list.append(tuple(move, TS.rank_to_points(move.Rank)))
-                chosen_move = min(value_list, key= lambda x: x[1])
-                # And here goes step 4
-                if len(same_suit_list) == 0:
-                    chosen_move = random.sample(moves, 1)
+            # move.cards[0].suit
+            # Here we go to step 3
+        elif PlayerPerspective.get_my_score()> PlayerPerspective.get_opponent_score() or chosen_move == None:
+            same_suit_list = [ move.cards[0].suit == last_suit for move in moves]
+            for move in same_suit_list:
+                value_list.append(tuple(move, TS.rank_to_points(move.Rank)))
+            chosen_move = min(value_list, key= lambda x: x[1])
+            # And here goes step 4
+            if len(same_suit_list) == 0:
+                chosen_move = random.sample(moves, 1)
                     
         return chosen_move
 
